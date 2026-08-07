@@ -110,7 +110,7 @@ async function main() {
       entry.querySelector(".containerDiv").innerHTML = '<div class="newBox">NEW</div>';
     }
 
-    entry.querySelector(".playCount").innerHTML = "<b>" + selectedPlays + "plays</b>"
+    entry.querySelector(".playCount").innerHTML = "<b>" + selectedPlays + " plays</b>"
     
     document.body.appendChild(entry);
   }
