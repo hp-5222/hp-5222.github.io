@@ -71,9 +71,8 @@ async function main() {
       console.log("NEW")
     }
     console.log("-------------------")
+    document.body.appendChild(entry);
   }
-
-  document.body.appendChild(entry);
 }
 
 main()
