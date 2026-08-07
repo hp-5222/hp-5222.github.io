@@ -69,3 +69,10 @@ body {
   padding-right: 2%;
   font-size: 130%;
 }
+
+.chartEntries {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
