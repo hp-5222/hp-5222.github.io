@@ -118,6 +118,28 @@ async function main() {
       let upOrDown = i < previousWeekRank ? "▲ " : "▼ ";
       if (i-previousWeekRank == 0) {
         entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">▶</div>';
+        if (i==1) {
+          let weeksAt1 = 2;
+          // Count consecutive weeks at #1
+          for (let j = chartOffset + 2; j <= weeklyCharts.weeklychartlist.chart.length; j++) {
+            const olderWeek = weeklyCharts.weeklychartlist.chart[weeklyCharts.weeklychartlist.chart.length - j];
+            if (!olderWeek) break;
+          
+            const olderChart = await getWeeklyAlbumChart(olderWeek.from, olderWeek.to);
+          
+            const numberOne = olderChart.weeklyalbumchart.album[0];
+          
+            if (
+              numberOne.name === selectedAlbum &&
+              numberOne.artist["#text"] === selectedArtist
+            ) {
+              weeksAt1++;
+            } else {
+              break;
+            }
+          }
+          entry.querySelector(".songInfoText").insertAdjacentHTML('afterend','<div style="background: #2e5ec7;color: white;border-radius: 3px;padding: 3px;font-size: 125%;"><b>' + weeksAt1 + 'WEEKS @ #1</b></div>');
+        }
       } else {
         entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">' + upOrDown + '</div><br><div class="numberChange"><b>' +String(Math.abs(i-previousWeekRank)) + '</b></div>';
       }
