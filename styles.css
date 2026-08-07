@@ -64,6 +64,7 @@ body {
 }
 
 .playCount {
+  margin-left: auto;
   padding-top: 2.5%;
   padding-right: 2%;
   font-size: 130%;
