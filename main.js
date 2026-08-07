@@ -90,8 +90,7 @@ async function main() {
     let selectedArtist = topAlbums.weeklyalbumchart.album[i-1].artist["#text"];
     let selectedPlays = topAlbums.weeklyalbumchart.album[i-1].playcount;
     entry.querySelector(".songInfoText").innerHTML = "<b>" + selectedAlbum + "</b>" + "<br>" + selectedArtist;
-    const cover = getWikipediaCover(selectedArtist, selectedAlbum);
-    entry.querySelector(".albumImage").src = cover;
+    getWikipediaCover(selectedArtist, selectedAlbum).then(cover => entry.querySelector(".albumImage").src = cover);
 
     let foundAlbum = priorTopAlbums.weeklyalbumchart.album.find(album =>
       album.name === selectedAlbum &&
