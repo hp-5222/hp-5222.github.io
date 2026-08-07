@@ -41,6 +41,7 @@ body {
   display:flex;
   justify-content: center;
   align-items: center;
+  flex-directon: column;
 }
 
 .newBox {
@@ -55,4 +56,9 @@ body {
 
 .movementArrow {
   font-size: 200%;
+}
+
+.numberChange {
+  font-size: 130%;
+  padding-bottom: 15%;
 }
