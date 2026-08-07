@@ -39,7 +39,12 @@ async function main() {
   let priorTo = priorWeek.to;
   let priorTopAlbums = await getWeeklyAlbumChart(priorFrom,priorTo);
 
+  const template = document.querySelector("#chart-entry-template");
+  
   for (let i=1; i<21; i++) {
+
+    const entry = template.content.cloneNode(true);
+    entry.querySelector(".rankText").textContent = i;
 
     // console.log(new Date(parseInt(from,10)*1000).toLocaleDateString('en-US'));
     // console.log(new Date(parseInt(to,10)*1000).toLocaleDateString('en-US'));
@@ -47,7 +52,7 @@ async function main() {
     let selectedAlbum = topAlbums.weeklyalbumchart.album[i-1].name;
     let selectedArtist = topAlbums.weeklyalbumchart.album[i-1].artist["#text"];
     let selectedPlays = topAlbums.weeklyalbumchart.album[i-1].playcount;
-    console.log(selectedAlbum + " - " + selectedArtist + " - " + selectedPlays + " plays");
+    entry.querySelector(".songInfoText").innerHTML = "<b>" + selectedAlbum + "</b>" + "<br>" + selectedArtist;
 
     let foundAlbum = priorTopAlbums.weeklyalbumchart.album.find(album =>
       album.name === selectedAlbum &&
