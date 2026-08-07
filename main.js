@@ -77,7 +77,7 @@ async function main() {
   let priorTopAlbums = await getWeeklyAlbumChart(priorFrom,priorTo);
 
   const template = document.getElementById("chart-entry-template");
-  document.getElementById("top-text").textContent = "Week of " + new Date(parseInt(to,10)*1000).toLocaleDateString('en-US')
+  document.getElementById("top-text").textContent = "Week of " + new Date(parseInt(to,10)*1000).toLocaleDateString('en-US');
   
   for (let i=1; i<21; i++) {
 
