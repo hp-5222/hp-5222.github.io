@@ -41,7 +41,7 @@ body {
   display:flex;
   justify-content: center;
   align-items: center;
-  flex-directon: column;
+  flex-direction: column;
 }
 
 .newBox {
