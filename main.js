@@ -72,6 +72,8 @@ async function main() {
     }
     console.log("-------------------")
   }
+
+  document.body.appendChild(entry);
 }
 
 main()
