@@ -104,7 +104,7 @@ async function main() {
       if (i-previousWeekRank == 0) {
         entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">▶</div>';
       } else {
-        entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">' + fianlStr + '</div>';
+        entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">' + finalStr + '</div>';
       }
     } else {
       entry.querySelector(".containerDiv").innerHTML = '<div class="newBox">NEW</div>';
