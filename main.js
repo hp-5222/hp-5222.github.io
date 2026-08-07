@@ -30,7 +30,15 @@ async function getWeeklyAlbumChart(from,to) {
   }
 }
 
+const coverCache = JSON.parse(localStorage.getItem("coverCache") || "{}");
+
 async function getWikipediaCover(artist, album) {
+  const key = `${artist}::${album}`;
+
+  if (key in coverCache) {
+    return coverCache[key];
+  }
+  
   const search = await fetch(
     `https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=${encodeURIComponent(
       `${artist} ${album} album`
@@ -64,7 +72,12 @@ async function getWikipediaCover(artist, album) {
   ).then(r => r.json());
 
   const file = Object.values(image.query.pages)[0];
-  return file.imageinfo?.[0]?.url ?? null;
+  const result = file.imageinfo?.[0]?.url ?? null;
+
+  coverCache[key] = result;
+  localStorage.setItem("coverCache", JSON.stringify(coverCache));
+
+  return result;
 }
 
 async function main() {
