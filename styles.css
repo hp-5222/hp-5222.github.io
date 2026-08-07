@@ -52,3 +52,7 @@ body {
   color: white;
   padding: 3px;
 }
+
+.movementArrow {
+  font-size: 200%;
+}
