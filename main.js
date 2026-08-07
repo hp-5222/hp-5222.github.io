@@ -39,7 +39,7 @@ async function main() {
   let priorTo = priorWeek.to;
   let priorTopAlbums = await getWeeklyAlbumChart(priorFrom,priorTo);
 
-  const template = document.querySelector("#chart-entry-template");
+  const template = document.getElementById("chart-entry-template");
   
   for (let i=1; i<21; i++) {
 
