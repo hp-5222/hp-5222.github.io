@@ -138,7 +138,7 @@ async function main() {
               break;
             }
           }
-          entry.querySelector(".songInfoText").insertAdjacentHTML('afterend','<div style="background: #2e5ec7;color: white;border-radius: 3px;padding: 3px;font-size: 125%;"><b>' + weeksAt1 + 'WEEKS @ #1</b></div>');
+          entry.querySelector(".songInfoText").insertAdjacentHTML('afterend','<div style="margin-left:auto;align-content:center;"><div style="background: #2e5ec7;color: white;border-radius: 3px;padding: 3px;font-size: 125%;"><b>' + weeksAt1 + ' WEEKS @ #1</b></div></div>');
         }
       } else {
         entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">' + upOrDown + '</div><br><div class="numberChange"><b>' +String(Math.abs(i-previousWeekRank)) + '</b></div>';
