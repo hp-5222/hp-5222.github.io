@@ -114,7 +114,7 @@ async function main() {
 
     entry.querySelector(".playCount").innerHTML = "<b>" + selectedPlays + " plays</b>"
     
-    document.body.appendChild(entry);
+    document.getElementById("chartEntries").appendChild(entry);
   }
 }
 
@@ -124,12 +124,14 @@ const nextWeekButton = document.getElementById("nextWeekButton");
 
 lastWeekButton.addEventListener('click', function() {
   chartOffset += 1;
+  document.getElementById("chartEntries").replaceChildren();
   main()
 });
 
-lastWeekButton.addEventListener('click', function() {
+nextWeekButton.addEventListener('click', function() {
   if (chartOffset > 1) {
     chartOffset -= 1;
+    document.getElementById("chartEntries").replaceChildren();
     main()
   }
 });
