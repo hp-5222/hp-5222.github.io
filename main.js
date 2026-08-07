@@ -45,6 +45,7 @@ async function main() {
 
     const entry = template.content.cloneNode(true);
     entry.querySelector(".rankText").textContent = i;
+    entry.querySelector(".albumImage").src = "https://coverartarchive.org/release/" + topAlbums.weeklyalbumchart.album[i-1].mbid + "/front"
 
     // console.log(new Date(parseInt(from,10)*1000).toLocaleDateString('en-US'));
     // console.log(new Date(parseInt(to,10)*1000).toLocaleDateString('en-US'));
