@@ -103,11 +103,12 @@ async function main() {
       let finalStr = upOrDown + String(Math.abs(i-previousWeekRank));
       if (i-previousWeekRank == 0) {
         console.log("▶")
+        entry.querySelector(".containerDiv").textContent = '▶';
       } else {
         console.log(finalStr);
       }
     } else {
-      console.log("NEW")
+      entry.querySelector(".containerDiv").innerHTML = '<div class="newBox">NEW</div>';
     }
     console.log("-------------------")
     document.body.appendChild(entry);
