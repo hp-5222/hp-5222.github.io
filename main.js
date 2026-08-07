@@ -103,7 +103,7 @@ async function main() {
       let finalStr = upOrDown + String(Math.abs(i-previousWeekRank));
       if (i-previousWeekRank == 0) {
         console.log("▶")
-        entry.querySelector(".containerDiv").textContent = '<div class="movementArrow">▶</div>';
+        entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">▶</div>';
       } else {
         console.log(finalStr);
       }
