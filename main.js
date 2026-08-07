@@ -1,8 +1,8 @@
 let chartOffset = 1;
+let username = 'happle5222'
 
 async function getWeeklyCharts() {
   const apiKey = 'd84c9b2caa4ff06ef2c35d5ba07f7f02';
-  const username = 'happle5222';
 
   const url = `https://ws.audioscrobbler.com/2.0/?method=user.getweeklychartlist&user=${username}&api_key=${apiKey}&format=json`;
 
@@ -17,7 +17,6 @@ async function getWeeklyCharts() {
 
 async function getWeeklyAlbumChart(from,to) {
   const apiKey = 'd84c9b2caa4ff06ef2c35d5ba07f7f02';
-  const username = 'happle5222';
 
   const url = `https://ws.audioscrobbler.com/2.0/?method=user.getWeeklyAlbumChart&user=${username}&api_key=${apiKey}&from=${from}&to=${to}&format=json`;
 
@@ -169,4 +168,12 @@ nextWeekButton.addEventListener('click', function() {
     document.getElementById("chartEntries").replaceChildren();
     main()
   }
+});
+
+const usernameInput = document.getElementById("usernameInput");
+input.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); 
+      username = input.value;
+    }
 });
