@@ -100,12 +100,11 @@ async function main() {
     if (foundAlbum) {
       let previousWeekRank = parseInt(foundAlbum["@attr"].rank,10);
       let upOrDown = i < previousWeekRank ? "▲ " : "▼ ";
-      let finalStr = upOrDown + String(Math.abs(i-previousWeekRank));
+      let finalStr = upOrDown + "<br>" + String(Math.abs(i-previousWeekRank));
       if (i-previousWeekRank == 0) {
-        console.log("▶")
         entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">▶</div>';
       } else {
-        console.log(finalStr);
+        entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">' + fianlStr + '</div>';
       }
     } else {
       entry.querySelector(".containerDiv").innerHTML = '<div class="newBox">NEW</div>';
