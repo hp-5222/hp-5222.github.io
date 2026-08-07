@@ -81,6 +81,7 @@ async function main() {
   for (let i=1; i<21; i++) {
 
     const entry = template.content.cloneNode(true);
+    const img = entry.querySelector(".albumImage");
     entry.querySelector(".rankText").textContent = i;
 
     // console.log(new Date(parseInt(from,10)*1000).toLocaleDateString('en-US'));
@@ -90,7 +91,7 @@ async function main() {
     let selectedArtist = topAlbums.weeklyalbumchart.album[i-1].artist["#text"];
     let selectedPlays = topAlbums.weeklyalbumchart.album[i-1].playcount;
     entry.querySelector(".songInfoText").innerHTML = "<b>" + selectedAlbum + "</b>" + "<br>" + selectedArtist;
-    getWikipediaCover(selectedArtist, selectedAlbum).then(cover => { entry.querySelector(".albumImage").src = cover; });
+    getWikipediaCover(selectedArtist, selectedAlbum).then(cover => { img.src = cover; });
 
     let foundAlbum = priorTopAlbums.weeklyalbumchart.album.find(album =>
       album.name === selectedAlbum &&
