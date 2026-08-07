@@ -170,7 +170,7 @@ nextWeekButton.addEventListener('click', function() {
   }
 });
 
-const usernameInput = document.getElementById("usernameInput");
+const input = document.getElementById("usernameInput");
 input.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         event.preventDefault(); 
