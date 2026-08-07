@@ -109,6 +109,9 @@ async function main() {
     } else {
       entry.querySelector(".containerDiv").innerHTML = '<div class="newBox">NEW</div>';
     }
+
+    entry.querySelector(".playCount").innerHTML = "<b>" + selectedPlays + "plays</b>"
+    
     document.body.appendChild(entry);
   }
 }
