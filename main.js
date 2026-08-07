@@ -1,3 +1,5 @@
+let chartOffset = 1;
+
 async function getWeeklyCharts() {
   const apiKey = 'd84c9b2caa4ff06ef2c35d5ba07f7f02';
   const username = 'happle5222';
@@ -67,11 +69,11 @@ async function getWikipediaCover(artist, album) {
 
 async function main() {
   let weeklyCharts = await getWeeklyCharts();
-  let mostRecentPeriod = weeklyCharts.weeklychartlist.chart[weeklyCharts.weeklychartlist.chart.length-1];
+  let mostRecentPeriod = weeklyCharts.weeklychartlist.chart[weeklyCharts.weeklychartlist.chart.length-chartOffset];
   let from = mostRecentPeriod.from;
   let to = mostRecentPeriod.to;
   let topAlbums = await getWeeklyAlbumChart(from,to);
-  let priorWeek = weeklyCharts.weeklychartlist.chart[weeklyCharts.weeklychartlist.chart.length - 2];
+  let priorWeek = weeklyCharts.weeklychartlist.chart[weeklyCharts.weeklychartlist.chart.length - chartOffset-1];
   let priorFrom = priorWeek.from;
   let priorTo = priorWeek.to;
   let priorTopAlbums = await getWeeklyAlbumChart(priorFrom,priorTo);
@@ -117,3 +119,17 @@ async function main() {
 }
 
 main()
+const lastWeekButton = document.getElementById("lastWeekButton");
+const nextWeekButton = document.getElementById("nextWeekButton");
+
+lastWeekButton.addEventListener('click', function() {
+  chartOffset += 1;
+  main()
+});
+
+lastWeekButton.addEventListener('click', function() {
+  if (chartOffset > 1) {
+    chartOffset -= 1;
+    main()
+  }
+});
