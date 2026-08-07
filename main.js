@@ -109,7 +109,6 @@ async function main() {
     } else {
       entry.querySelector(".containerDiv").innerHTML = '<div class="newBox">NEW</div>';
     }
-    console.log("-------------------")
     document.body.appendChild(entry);
   }
 }
