@@ -28,6 +28,43 @@ async function getWeeklyAlbumChart(from,to) {
   }
 }
 
+async function getWikipediaCover(artist, album) {
+  const search = await fetch(
+    `https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=${encodeURIComponent(
+      `${artist} ${album} album`
+    )}&format=json`
+  ).then(r => r.json());
+
+  const page = search.query.search[0];
+  if (!page) return null;
+
+  const wiki = await fetch(
+    `https://en.wikipedia.org/w/api.php?origin=*&action=parse&page=${encodeURIComponent(
+      page.title
+    )}&prop=wikitext&format=json`
+  ).then(r => r.json());
+
+  const text = wiki.parse?.wikitext?.["*"];
+  if (!text) return null;
+
+  const match = text.match(/^\|\s*cover\s*=\s*(.+)$/im);
+  if (!match) return null;
+
+  const filename = match[1]
+    .split("|")[0]       // remove any formatting/template args
+    .replace(/\[\[|\]\]/g, "")
+    .trim();
+
+  const image = await fetch(
+    `https://en.wikipedia.org/w/api.php?origin=*&action=query&titles=${encodeURIComponent(
+      `File:${filename.replace(/^File:/i, "")}`
+    )}&prop=imageinfo&iiprop=url&format=json`
+  ).then(r => r.json());
+
+  const file = Object.values(image.query.pages)[0];
+  return file.imageinfo?.[0]?.url ?? null;
+}
+
 async function main() {
   let weeklyCharts = await getWeeklyCharts();
   let mostRecentPeriod = weeklyCharts.weeklychartlist.chart[weeklyCharts.weeklychartlist.chart.length-1];
@@ -45,7 +82,6 @@ async function main() {
 
     const entry = template.content.cloneNode(true);
     entry.querySelector(".rankText").textContent = i;
-    entry.querySelector(".albumImage").src = "https://coverartarchive.org/release/" + topAlbums.weeklyalbumchart.album[i-1].mbid + "/front"
 
     // console.log(new Date(parseInt(from,10)*1000).toLocaleDateString('en-US'));
     // console.log(new Date(parseInt(to,10)*1000).toLocaleDateString('en-US'));
@@ -54,6 +90,8 @@ async function main() {
     let selectedArtist = topAlbums.weeklyalbumchart.album[i-1].artist["#text"];
     let selectedPlays = topAlbums.weeklyalbumchart.album[i-1].playcount;
     entry.querySelector(".songInfoText").innerHTML = "<b>" + selectedAlbum + "</b>" + "<br>" + selectedArtist;
+    const cover = getWikipediaCover(selectedArtist, selectedAlbum);
+    entry.querySelector(".albumImage").src = cover;
 
     let foundAlbum = priorTopAlbums.weeklyalbumchart.album.find(album =>
       album.name === selectedAlbum &&
