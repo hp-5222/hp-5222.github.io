@@ -164,7 +164,7 @@ async function main() {
       console.log("selectedArtist:", selectedArtist);
       let isReentry = allTimeTopAlbums.topalbums.album.some(album =>
         album.name === selectedAlbum &&
-        album.artist["#text"] === selectedArtist
+        album.artist.name === selectedArtist
       );
       let newBoxHTML = isReentry ? '<div class="newBox" style="font-size:90%;">RE-ENTRY</div>' : '<div class="newBox">NEW</div>';
       entry.querySelector(".containerDiv").innerHTML = newBoxHTML;
