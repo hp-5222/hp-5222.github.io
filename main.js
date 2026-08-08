@@ -158,6 +158,10 @@ async function main() {
         entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">' + upOrDown + '</div><br><div class="numberChange"><b>' +String(Math.abs(i-previousWeekRank)) + '</b></div>';
       }
     } else {
+      console.log("allTimeTopAlbums:", allTimeTopAlbums);
+      console.log("albums:", allTimeTopAlbums?.topalbums?.album);
+      console.log("selectedAlbum:", selectedAlbum);
+      console.log("selectedArtist:", selectedArtist);
       let isReentry = allTimeTopAlbums.topalbums.album.some(album =>
         album.name === selectedAlbum &&
         album.artist["#text"] === selectedArtist
