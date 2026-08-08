@@ -29,6 +29,20 @@ async function getWeeklyAlbumChart(from,to) {
   }
 }
 
+async function getAllTimeTopAlbums() {
+  const apiKey = 'd84c9b2caa4ff06ef2c35d5ba07f7f02';
+
+  const url = `https://ws.audioscrobbler.com/2.0/?method=user.getTopAlbums&user=${username}&api_key=${apiKey}&limit=500&format=json`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 const coverCache = JSON.parse(localStorage.getItem("coverCache") || "{}");
 
 async function getWikipediaCover(artist, album) {
@@ -89,6 +103,7 @@ async function main() {
   let priorFrom = priorWeek.from;
   let priorTo = priorWeek.to;
   let priorTopAlbums = await getWeeklyAlbumChart(priorFrom,priorTo);
+  let allTimeTopAlbums = await getAllTimeTopAlbums();
 
   const template = document.getElementById("chart-entry-template");
   document.getElementById("top-text").textContent = "Week of " + new Date(parseInt(to,10)*1000).toLocaleDateString('en-US');
@@ -143,7 +158,12 @@ async function main() {
         entry.querySelector(".containerDiv").innerHTML = '<div class="movementArrow">' + upOrDown + '</div><br><div class="numberChange"><b>' +String(Math.abs(i-previousWeekRank)) + '</b></div>';
       }
     } else {
-      entry.querySelector(".containerDiv").innerHTML = '<div class="newBox">NEW</div>';
+      let isReentry = allTimeTopAlbums.topAlbums.album.some(album =>
+        album.name === selectedAlbum &&
+        album.artist["#text"] === selectedArtist
+      );
+      let newBoxHTML = isReentry ? '<div class="newBox" style="font-size:90%;">RE-ENTRY</div>' : '<div class="newBox">NEW</div>';
+      entry.querySelector(".containerDiv").innerHTML = newBoxHTML;
     }
 
     entry.querySelector(".playCount").innerHTML = "<b>" + selectedPlays + " plays</b>"
